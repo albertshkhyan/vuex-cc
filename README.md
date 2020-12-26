@@ -1,19 +1,38 @@
-# vuex-crash-course
+# VueX
 
-## Project setup
+## Initial setup
+
+* After instal vuex, we must register it in Vue as simple plugin.
+```javascript
+//store/index.js
+import Vue from "vue";
+import Vuex from "vuex";
+
+Vue.use(Vuex);//register ad plugin
 ```
-yarn install
+* then we need to form the ***store*** object.
+```javascript
+//store/index.js
+export default new Vuex.Store({
+    //after register vuex in vue as plugin, we create object configuaration for vuex.
+})
+```
+<hr/>
+
+* After thate we must register vuex object in our application.
+```javascript
+//main.js
+import Vue from 'vue'
+import App from './App.vue'
+import store from "./store"
+
+Vue.config.productionTip = false
+
+new Vue({
+  store,//register in app our store object
+  render: h => h(App),
+}).$mount('#app')
+
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Now finshed registration process of Vuex.
