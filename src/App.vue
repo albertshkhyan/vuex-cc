@@ -20,44 +20,21 @@ export default {
       posts: [],
     };
   },
-  // async mounted() {//componentDidMount === mounted
-  //   const res = await fetch(
-  //     "https://jsonplaceholder.typicode.com/posts?_limit=3"
-  //   );
-  //   const posts = await res.json();
-  //   this.posts = posts;
-  // },
 
-  //#for access getteres from store we must use computed property
-  //#Variant 1
   // computed: {
-  //   //#in here we must specify name of that getter wchich exist in store
-  //   getAllPosts() {
-  //     //👈 getAllPosts
-  //     // console.log("this.$store", this.$store); //Store {commit, dispatch, getters, _actions ...}
-  //     // return this.$store.posts;
-
-  //     //1 old variant
-  //     return this.$store.getters.getAllPosts; //👈 getAllPosts - old variant
-  //     //2 modern variant - get getter with helper funstion of vuex
-  //     // return mapGetters(["getAllPosts"]); //mapGetters: mapper parameter must be either an Array or an Object
-  //   },
+  //   ...mapGetters(["getAllPosts"]),
   // },
-  //#Variant 2 - with mapGetters
-  computed: {
-    ...mapGetters(["getAllPosts"]), //mapGetters return object {type: [string], Function}
-  },
+
+  computed: mapGetters(["getAllPosts"]),
 
   //# How use mapActions in mounted
-  methods: {
-    ...mapActions(["fetchPosts"]),
-  },
+  // methods: {
+  //   ...mapActions(["fetchPosts"]),
+  // },
+  methods: mapActions(["fetchPosts"]),
 
   //# How change state
   mounted() {
-    console.log("this.$store -----", this.$store);
-    // this.$store.dispatch("fetchPosts"); //old variant, 1 arg - type of action, 2 arg - payload
-    // return mapActions(["fetchPosts"]);//❌
     this.fetchPosts(); //✅
   },
 };
