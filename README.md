@@ -88,7 +88,7 @@ new Vue({
 
 
 ## Actions
-* In order to work with the backend we must use **action**
+* In order to work with the backend api (service) we must use **action**
 <br/>
 [What is action in vuex and how use it ? (image)](https://i.imgur.com/BzoZCtR.png)
 ![What is action in vuex and how use it ?](https://i.imgur.com/BzoZCtR.png)
