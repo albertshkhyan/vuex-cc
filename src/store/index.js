@@ -16,12 +16,18 @@ export default new Vuex.Store({
         ]
     },
     actions: {
-        async fetchPosts() {
+        async fetchPosts(context, payload) {
+            console.log('context of action', context);
             const res = await fetch(
                 "https://jsonplaceholder.typicode.com/posts?_limit=3"
             );
             const posts = await res.json();
-            console.log('posts', posts);
+            // console.log('posts', posts);
+            //# for change state we must use mutations, for call mustations we use commit
+            //## for call GET_ALL_POSTS MUTATION we use commit from store object
+            //### 1 argument - type of mutation (mutation function name) - 2. payload
+            context.commit("GET_ALL_POSTS", posts)//run mutation
+
         }
     },
     getters: {
@@ -32,5 +38,14 @@ export default new Vuex.Store({
             return state.posts;
         }
     },
-    mutations: {},
+    mutations: {
+        //#⚠ One important rule to remember is that mutation handlers must be synchronous.
+        GET_ALL_POSTS(state, payload) {//{ [type: string]: Function }
+            console.log('payload', payload);
+            //# For chnage state we must use state paramter: state.someValue = newValue;
+            //payload === posts from server
+            state.posts = payload;
+
+        }
+    },
 });

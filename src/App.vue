@@ -2,6 +2,7 @@
 
 <template>
   <div id="app">
+    <h1>Hello from vuex</h1>
     <div v-for="post in getAllPosts" class="post" :key="post.id">
       <h2>{{ post.title }}</h2>
       <p>{{ post.body }}</p>
@@ -10,6 +11,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "App",
   data() {
@@ -26,14 +29,36 @@ export default {
   // },
 
   //#for access getteres from store we must use computed property
+  //#Variant 1
+  // computed: {
+  //   //#in here we must specify name of that getter wchich exist in store
+  //   getAllPosts() {
+  //     //👈 getAllPosts
+  //     // console.log("this.$store", this.$store); //Store {commit, dispatch, getters, _actions ...}
+  //     // return this.$store.posts;
+
+  //     //1 old variant
+  //     return this.$store.getters.getAllPosts; //👈 getAllPosts - old variant
+  //     //2 modern variant - get getter with helper funstion of vuex
+  //     // return mapGetters(["getAllPosts"]); //mapGetters: mapper parameter must be either an Array or an Object
+  //   },
+  // },
+  //#Variant 2 - with mapGetters
   computed: {
-    //#in here we must specify name of that getter wchich exist in store
-    getAllPosts() {
-      //👈 getAllPosts
-      // console.log("this.$store", this.$store); //Store {commit, dispatch, getters, _actions ...}
-      // return this.$store.posts;
-      return this.$store.getters.getAllPosts; //👈 getAllPosts
-    },
+    ...mapGetters(["getAllPosts"]), //mapGetters return object {type: [string], Function}
+  },
+
+  //# How use mapActions in mounted
+  methods: {
+    ...mapActions(["fetchPosts"]),
+  },
+
+  //# How change state
+  mounted() {
+    console.log("this.$store -----", this.$store);
+    // this.$store.dispatch("fetchPosts"); //old variant, 1 arg - type of action, 2 arg - payload
+    // return mapActions(["fetchPosts"]);//❌
+    this.fetchPosts(); //✅
   },
 };
 </script>
