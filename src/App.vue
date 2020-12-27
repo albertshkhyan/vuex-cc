@@ -2,7 +2,7 @@
 
 <template>
   <div id="app">
-    <div v-for="post in posts" class="post" :key="post.id">
+    <div v-for="post in getAllPosts" class="post" :key="post.id">
       <h2>{{ post.title }}</h2>
       <p>{{ post.body }}</p>
     </div>
@@ -17,12 +17,23 @@ export default {
       posts: [],
     };
   },
-  async mounted() {
-    const res = await fetch(
-      "https://jsonplaceholder.typicode.com/posts?_limit=3"
-    );
-    const posts = await res.json();
-    this.posts = posts;
+  // async mounted() {//componentDidMount === mounted
+  //   const res = await fetch(
+  //     "https://jsonplaceholder.typicode.com/posts?_limit=3"
+  //   );
+  //   const posts = await res.json();
+  //   this.posts = posts;
+  // },
+
+  //#for access getteres from store we must use computed property
+  computed: {
+    //#in here we must specify name of that getter wchich exist in store
+    getAllPosts() {
+      //👈 getAllPosts
+      // console.log("this.$store", this.$store); //Store {commit, dispatch, getters, _actions ...}
+      // return this.$store.posts;
+      return this.$store.getters.getAllPosts; //👈 getAllPosts
+    },
   },
 };
 </script>
