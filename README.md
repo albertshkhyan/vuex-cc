@@ -40,10 +40,10 @@ new Vue({
 ## ⚫ part 2
 
 * When we set up a store we can implement 4 types of fields here.
-    * **actions** - in an object
+    * **actions** - in an object, in actions we implement asynchronous functions
     * **mutations** - this object contains functions that will directly modify store.
-    * **state** - here we define the initial data.
-    * **getters** - allow to transform data and get it from the store.
+    * **state** - here we define the initial data (BLL).
+    * **getters** - allow to transform data and get it from the store. In order to we can receive data with getters in ui, we use in ui computed property
         * ⚠*but besides these 4 fields there is one more field called:*
             * **modules** - we can  <span style="background: yellow; color: black;">**decompose** (*dividing the whole into parts.*)</span> the logic in the vuex store.
     ```javascript
@@ -100,13 +100,14 @@ new Vue({
     ```javascript
     export default {
          mustations: {
-             updatePosts() {//1 parameter always state, 2 what we will transfer to it
-             
-
-             }
+             /*updatePosts() {//1 parameter always state, 2 what we will transfer to it}*/
+             UPDATE_POSTS() {}//according to convention we write mutation name uppercase
         }
     }
     ```
+    ![Workflow of vuex (mutation uppercase)](https://miro.medium.com/max/4660/1*fZqgEDSsxBfj25s-eL0bMQ.png)
+
+    
 
 
 
