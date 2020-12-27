@@ -3,10 +3,10 @@ export default {
         posts: []
     },
     actions: {
-        async fetchPosts(context, payload) {
-            console.log('context of action', context);
+        // async fetchPosts(context, payload) {
+        async fetchPosts(context, limit = 3) {
             const res = await fetch(
-                "https://jsonplaceholder.typicode.com/posts?_limit=3"
+                `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`
             );
             const posts = await res.json();
             context.commit("GET_ALL_POSTS", posts)
@@ -16,6 +16,9 @@ export default {
     getters: {
         getAllPosts(state, getters) {
             return state.posts;
+        },
+        countOfPosts(state) {
+            return state.posts.length;
         }
     },
     mutations: {

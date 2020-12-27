@@ -1,118 +1,51 @@
 # VueX
 
-## ⚫ Initial setup
+## Now how implement pass parameters to action ?
 
-* After instal vuex, we must register it in Vue as simple plugin.
-```javascript
-//store/index.js
-import Vue from "vue";
-import Vuex from "vuex";
 
-Vue.use(Vuex);//register ad plugin
+```javascript   
+  methods: mapActions(["fetchPosts"]),
+
+  //# How change state
+  mounted() {
+    this.fetchPosts(4); //✅pass payload to our action
+  },
 ```
-* then we need to form the ***store*** object.
-```javascript
-//store/index.js
-export default new Vuex.Store({
-    //after register vuex in vue as plugin, we create object configuaration for vuex.
-})
+```js
+    actions: {
+        // async fetchPosts(context, payload) {
+        async fetchPosts(context, limit = 3) {
+            const res = await fetch(
+                `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`
+            );
+            const posts = await res.json();
+            context.commit("GET_ALL_POSTS", posts)
+
+        }
+    },
 ```
 <hr/>
 
-* After thate we must register vuex object in our application.
-```javascript
-//main.js
-import Vue from 'vue'
-import App from './App.vue'
-import store from "./store"
+## Now how can we work with gettars ?
 
-Vue.config.productionTip = false
-
-new Vue({
-  store,//register in app our store object
-  render: h => h(App),
-}).$mount('#app')
+* Now we will implement getter which return count of posts.
+```js
+    getters: {
+        getAllPosts(state, getters) {
+            return state.posts;
+        },
+        postCount(state) {
+            return state.posts.length;
+        }
+    },
+```
+```js
+  computed: mapGetters(["getAllPosts", "postCount"]),
 
 ```
 
-### Now finshed registration process of Vuex.
-
-## ⚫ part 2
-
-* When we set up a store we can implement 4 types of fields here.
-    * **actions** - in an object, in actions we implement asynchronous functions
-    * **mutations** - this object contains functions that will directly modify store.
-    * **state** - here we define the initial data (BLL).
-    * **getters** - allow to transform data and get it from the store. In order to we can receive data with getters in ui, we use in ui computed property
-        * ⚠*but besides these 4 fields there is one more field called:*
-            * **modules** - we can  <span style="background: yellow; color: black;">**decompose** (*dividing the whole into parts.*)</span> the logic in the vuex store.
-    ```javascript
-    export default new Vuex.Store({
-        actions: {},
-        mutations: {},
-        state: {},
-        getters: {},
-
-        modules: {
-
-        }
-
-
-    });
-
-    ```
-
-    * **modules** -  modules are ordinary javascript files which the object exports.
-        * For each entity (сущности), we can create a separate module and carry out the logic by decomposing(dividing the whole into parts) it.
-        ![decompositon logic with modules](https://i.imgur.com/LgwEp2M.png)
-        * Further(далее) in order to (для того чтобы) register this module.
-        <br/>
-        ![decompositon logic with modules](https://i.imgur.com/UtG03YI.png)
-        <br/>
-        Why need modules ?
-        ![Explain modules](https://i.imgur.com/ooGYasm.png)
-        <br/>
-        How use modules ?
-        ![Explain modules 2](https://i.imgur.com/qSrTTyg.png)
-        * *data* in components not needed. In order to receive getters, we refer to the <span style="background: yellow; color: black;">computed</span> property.
-        <br/>
-        ⚠ computed will react to any change in getter.
-        <br/>
-        ![How get datas from components](https://i.imgur.com/eblDg3M.png)
-        <br/>
-        * Now in our component has a field **allPosts**
-        ### 1. How get getters from store. Old variant
-        ![How get data from tempalate](https://i.imgur.com/m6yXbvC.png)
-        ### 2. Useing helpers functions of vuex. Modern variant.
-        ![How get data from tempalate](https://i.imgur.com/nUpfW3m.png)
-
-
-## Actions
-* In order to work with the backend api (service) we must use **action**
-<br/>
-[What is action in vuex and how use it ? (image)](https://i.imgur.com/BzoZCtR.png)
-![What is action in vuex and how use it ?](https://i.imgur.com/BzoZCtR.png)
-
-## Mutations
- * We need to change the state. To do this we must use mutations. <br/>
-    Muatations designed to change the state.
-
-    ```javascript
-    export default {
-         mustations: {
-             /*updatePosts() {//1 parameter always state, 2 what we will transfer to it}*/
-             UPDATE_POSTS() {}//according to convention we write mutation name uppercase
-        }
-    }
-    ```
-    ![Workflow of vuex (mutation uppercase)](https://miro.medium.com/max/4660/1*fZqgEDSsxBfj25s-eL0bMQ.png)
-
-    
-
-
-
-
         
 
 
         
+ 
