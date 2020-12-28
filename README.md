@@ -5,6 +5,8 @@
 ### When useing syncronous function.
 
 * how change state (without actions)
+<br/>
+⚠ Since we will not be accessing the backend we will use the mutation in UI.
 ```js
  methods: {
     ...mapMutations(["CREATE_POST"]),//1
@@ -16,7 +18,6 @@
         body,
         id: Date.now(),
       };
-      console.log("newPost", newPost);
       this.CREATE_POST(newPost);//2
     },
  }
