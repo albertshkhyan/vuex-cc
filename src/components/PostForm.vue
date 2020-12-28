@@ -5,8 +5,9 @@
         <form @submit.prevent="handleAddPost">
           <div class="form-group">
             <label for="title">Title</label>
+            <!--give or set value -> v-model="title" -->
             <input
-              name="title"
+              v-model="title"
               required
               type="text"
               class="form-control"
@@ -17,7 +18,7 @@
           <div class="form-group">
             <label for="body">Body</label>
             <textarea
-              name="body"
+              v-model="body"
               required
               placeholder="Enter body"
               class="form-control"
@@ -36,24 +37,28 @@
 import { mapMutations } from "vuex";
 
 export default {
+  data() {
+    return {
+      //   title: "hello",//set value with v-model="title"
+      title: "",
+      body: "",
+    };
+  },
   methods: {
     ...mapMutations(["CREATE_POST"]), //now we can use CREATE_POST in another method
     /**{
      * mapMutations - returns an object populated with functions
      *  {CREATE_POST: function() {}}
      * } */
+    //# For work with 2 way binding we must create thate field whcih given v-model in data.
 
     handleAddPost(data) {
-      //   console.log("data", data);
-      //   console.log("data.target", data.target);
-      //   console.log("data.target.title", data.target.title.value);
-      //   console.log("data.target.body", data.target.body.value);
-      //   console.log("working");
-      const title = data.target.title.value;
-      const body = data.target.body.value;
+      //   const title = data.target.title.value;
+      //   const body = data.target.body.value;
+      //#Without name we can use 2 way binding, (v-model)
       const newPost = {
-        title,
-        body,
+        title: this.title,
+        body: this.body,
         id: Date.now(),
       };
       console.log("newPost", newPost);

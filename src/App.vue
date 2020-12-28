@@ -22,11 +22,11 @@ export default {
   components: {
     PostForm,
   },
-  data() {
-    return {
-      posts: [],
-    };
-  },
+  // data() {
+  //   return {
+  //     posts: [],
+  //   };
+  // },
 
   // computed: {
   //   ...mapGetters(["getAllPosts"]),
