@@ -6,7 +6,7 @@
     <PostForm />
     <hr />
     <h2>You have {{ countOfPosts }} posts.</h2>
-    <div v-for="post in getAllPosts" class="post" :key="post.id">
+    <div v-for="post in validPosts" class="post" :key="post.id">
       <h2>{{ post.title }}</h2>
       <p>{{ post.body }}</p>
     </div>
@@ -32,7 +32,7 @@ export default {
   //   ...mapGetters(["getAllPosts"]),
   // },
 
-  computed: mapGetters(["getAllPosts", "countOfPosts"]),
+  computed: mapGetters(["validPosts", "countOfPosts"]),
 
   //# How use mapActions in mounted
   // methods: {

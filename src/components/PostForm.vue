@@ -8,7 +8,6 @@
             <!--give or set value -> v-model="title" -->
             <input
               v-model="title"
-              required
               type="text"
               class="form-control"
               id="title"
@@ -19,7 +18,6 @@
             <label for="body">Body</label>
             <textarea
               v-model="body"
-              required
               placeholder="Enter body"
               class="form-control"
               id="body"
@@ -63,6 +61,7 @@ export default {
       };
       console.log("newPost", newPost);
       this.CREATE_POST(newPost);
+      this.title = this.body = "";
     },
   },
 };

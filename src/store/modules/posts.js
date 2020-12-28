@@ -17,8 +17,11 @@ export default {
         getAllPosts(state, getters) {
             return state.posts;
         },
-        countOfPosts(state) {
-            return state.posts.length;
+        countOfPosts(state, getter) {
+            return getter.validPosts.length;
+        },
+        validPosts(state) {
+            return state.posts.filter(p => p.title && p.body);
         }
     },
     mutations: {
