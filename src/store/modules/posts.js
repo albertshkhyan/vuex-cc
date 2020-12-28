@@ -25,6 +25,10 @@ export default {
         GET_ALL_POSTS(state, payload) {
             state.posts = payload;
 
+        },
+        CREATE_POST(state, payload) {
+            state.posts.unshift(payload);
+
         }
     },
 }

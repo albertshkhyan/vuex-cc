@@ -3,6 +3,8 @@
 <template>
   <div id="app">
     <h1>Hello from vuex</h1>
+    <PostForm />
+    <hr />
     <h2>You have {{ countOfPosts }} posts.</h2>
     <div v-for="post in getAllPosts" class="post" :key="post.id">
       <h2>{{ post.title }}</h2>
@@ -13,9 +15,13 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import PostForm from "./components/PostForm.vue";
 
 export default {
   name: "App",
+  components: {
+    PostForm,
+  },
   data() {
     return {
       posts: [],
