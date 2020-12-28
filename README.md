@@ -23,6 +23,22 @@
 
 ```
 
+### Add post with v-model (2 way binding)
+```js
+    handleAddPost(data) {
+      //   const title = data.target.title.value;
+      //   const body = data.target.body.value;
+      //#Without name we can use 2 way binding, (v-model)
+      const newPost = {
+        title: this.title,
+        body: this.body,
+        id: Date.now(),
+      };
+      this.CREATE_POST(newPost);
+    },
+  },
+```
+
 
         
  
